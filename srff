@@ -1,0 +1,64 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    16:00:37 02/21/2022 
+// Design Name: 
+// Module Name:    sr_ff 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module sr_ff(s,r,c,q,qb);
+input s,r,c;
+output q,qb;
+reg q,qb;
+initial
+begin
+q=0;qb=1;end
+always@(c)
+begin
+if(c==1)
+begin
+case({s,r})
+2'd0:begin q=q;qb=qb;end
+2'd1:begin q=0;qb=1;end
+2'd2:begin q=1;qb=0;end
+2'd3:begin q=0;qb=0;end
+endcase
+end
+else
+begin q=q;qb=qb;end
+end
+endmodule
+
+module sr_ff_tb();
+reg s,r,c;
+wire q,qb;
+
+sr_ff s1(s,r,c,q,qb);
+
+initial
+begin
+forever
+begin
+begin s=0;r=0;c=0;end#10;
+begin s=0;r=0;c=1;end#10;
+begin s=0;r=1;c=0;end#10;
+begin s=0;r=1;c=1;end#10;
+begin s=1;r=0;c=0;end#10;
+begin s=1;r=0;c=1;end#10;
+begin s=1;r=1;c=0;end#10;
+begin s=1;r=1;c=1;end#10;
+end
+end
+endmodule
