@@ -1,0 +1,56 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    16:02:25 02/21/2022 
+// Design Name: 
+// Module Name:    t_ff 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module t_ff(t,c,q,qb);
+input t,c;
+output q,qb;
+reg q,qb;
+initial
+begin q=0;qb=1;end
+always@(c)
+begin
+if(c==1)
+begin
+case(t)
+1'd0:begin q=q;qb=qb;end
+2'd1:begin q=(~q);qb=(~qb);end
+endcase
+end
+else
+begin q=q;qb=qb;end
+end
+endmodule
+
+module t_ff_tb();
+reg t,c;
+wire q,qb;
+
+t_ff t1(t,c,q,qb);
+initial
+begin
+forever
+begin
+begin t=0;c=0;end #10;
+begin t=0;c=1;end #10;
+begin t=1;c=0;end #10;
+begin t=1;c=1;end #10;
+end
+end
+endmodule
