@@ -1,0 +1,64 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    15:56:10 02/21/2022 
+// Design Name: 
+// Module Name:    jk_ff 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module jk_ff(j,k,c,q,qb);
+input j,k,c;
+output q,qb;
+reg q,qb;
+initial
+begin
+q=0;qb=1;end
+always@(c)
+begin
+if(c==1)
+begin
+case({j,k})
+2'd0:begin q=q;qb=qb;end
+2'd1:begin q=0;qb=1;end
+2'd2:begin q=1;qb=0;end
+2'd3:begin q=(~q);qb=(~qb);end
+endcase
+end
+else
+begin q=q;qb=qb;end
+end
+endmodule
+
+module jk_ff_tb();
+reg j,k,c;
+wire q,qb;
+
+jk_ff j1(j,k,c,q,qb);
+
+initial
+begin
+forever
+begin
+begin j=0;k=0;c=0;end#10;
+begin j=0;k=0;c=1;end#10;
+begin j=0;k=1;c=0;end#10;
+begin j=0;k=1;c=1;end#10;
+begin j=1;k=0;c=0;end#10;
+begin j=1;k=0;c=1;end#10;
+begin j=1;k=1;c=0;end#10;
+begin j=1;k=1;c=1;end#10;
+end
+end
+endmodule
