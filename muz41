@@ -1,0 +1,38 @@
+module muxe41(a,s,q);
+input [3:0]a;
+input [1:0]s;
+output q;
+reg q;
+always @(a,s)
+begin
+case (s)
+2'b00:q=a[0];
+2'b01:q=a[1];
+2'b10:q=a[2]; 
+2'b11:q=a[3]; 
+endcase
+end
+endmodule
+
+module muxe41_tb();
+reg [3:0]a;
+reg [1:0]s; 
+wire q;
+integer i,j;
+muxe41 a1(a,s,q);
+initial 
+begin 
+forever
+begin
+begin a=4'b0000 ;s=2'b00; end #20;
+for(i=0;i<3;i=i+1)
+begin 
+for(j=0;j<15;j=j+1)
+begin 
+a=a+1;#10;
+end
+s=s+1;#10;
+end
+end
+end
+endmodule
