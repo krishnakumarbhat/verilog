@@ -23,6 +23,7 @@ module nor(a,b,c);
 endmodule
 
 
+
 module xor(a,b,d,f,c);
   input a,b;
   output c;
